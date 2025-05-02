@@ -1,0 +1,31 @@
+💡 Concept:
+Enums can have concrete methods (common logic).
+Enums can also have abstract methods, but then each constant must implement it individually.
+
+```java
+public enum Operation {
+    ADD {
+        public int apply(int a, int b) { return a + b; }
+    },
+    SUBTRACT {
+        public int apply(int a, int b) { return a - b; }
+    };
+
+    public abstract int apply(int a, int b); // Abstract method
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int result = Operation.ADD.apply(10, 5);     // 15
+        System.out.println(result);
+    }
+}
+🔚 TL;DR Summary
+
+| Feature     | Enum Behavior                                                               |
+| ----------- | --------------------------------------------------------------------------- |
+| Inheritance | Enums implicitly extend `Enum<T>`. Can’t extend other classes               |
+| Interface   | Enums can implement one or more interfaces                                  |
+| Constructor | Enum constructor runs at class load time, can’t be called manually          |
+| Methods     | Can have both concrete & abstract methods. Abstract ones must be overridden |
+

@@ -1,0 +1,32 @@
+💡 Concept:
+Enum constants call constructors internally once — when the enum is loaded.
+You can’t call enum constructor manually.
+
+```java
+public enum Role {
+    ADMIN("Admin has full power"),
+    USER("User has limited power");
+
+    private final String description;
+
+    // Constructor
+    Role(String desc) {
+        this.description = desc;
+        System.out.println("Constructor called for: " + this.name());
+    }
+
+    public String getDescription() {
+        return description;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(Role.ADMIN.getDescription());
+    }
+}
+```
+Output:
+Constructor called for: ADMIN
+Constructor called for: USER
+Admin has full power
+

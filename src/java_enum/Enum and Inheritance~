@@ -1,0 +1,39 @@
+1.Enum and Inheritance
+All enums implicitly extend java.lang.Enum class. As a class can only extend one parent in Java, an enum cannot extend anything else.
+toString() method is overridden in java.lang.Enum class, which returns enum constant name.
+enum can implement many interfaces.
+
+public enum Status {
+    ACTIVE, INACTIVE;
+}
+
+// Behind the scenes, it becomes:
+public final class Status extends Enum<Status> {
+    ...
+}
+public class MyClass {}
+
+public enum MyEnum extends MyClass { // ❌ ERROR
+}
+
+✅ BUT: You can implement interfaces. That’s the flex.
+
+
+2. Enums Can Implement Interfaces
+Enums can implement one or more interfaces — for shared behavior.
+interface Printable {
+    void print();
+}
+
+public enum Status implements Printable {
+    ACTIVE {
+        public void print() {
+            System.out.println("Active user");
+        }
+    },
+    INACTIVE {
+        public void print() {
+            System.out.println("Inactive user");
+        }
+    }
+}
