@@ -1,0 +1,70 @@
+# Step to create a lamada expression
+
+private static void printMessage() {
+    System.out.println("hello world");
+}
+
+ 1. Remove the method body or modifiers
+ 2. Remove the method name
+ 3  Remove return type
+
+ 4. Add -> operator
+ 5. Add method body
+Case 1:
+example:
+normal method
+private static void printMessage() {
+    System.out.println("hello world");
+}
+
+lambda expression
+() -> System.out.println("hello world");
+
+ Case 2: having  method argument
+example:
+private static void printMessage(int a ,int b) {
+    System.out.println(a+b);
+}
+
+lambda expression
+(a,b)-> System.out.println(a+b);
+
+Case 3: having  method argument and return type
+example:
+private static int printMessage(int a ,int b) {
+    return a+b;
+}
+
+lambda expression
+(int a,int b)-> {return a+b;};
+Notes:  we can used type inference in lambda expression. (compiler will infer the return type and date type of argument automatically.)
+        we can remove curly braces if there is only one statement in method body.
+        we can remove return keyword if there is only one statement in method body.
+
+example:  (a,b)->a+b;
+
+ if we have only one argument, we can remove  ().
+ public static int returnMessageLength(String a){ {
+   return a.length;
+ }
+
+ //public static int returnMessageLength(String a) -> a.length;
+  (String a) -> a.length;  => a->a.length;
+
+Benefits of lambda expression  :
+
+1. It is more readable
+2. It is more compact
+3. It is more efficient
+
+Its enable functional programming in java.
+to make lamda expression more readable and more efficient, we can use method references.
+jar file size is reduced.
+eliminate shadow variable.
+
+
+
+
+
+
+

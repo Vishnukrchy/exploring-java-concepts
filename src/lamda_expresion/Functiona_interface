@@ -1,0 +1,44 @@
+Functional Interface in Java
+
+A functional interface is a type of interface that contains only one abstract method.
+It is a functional interface if it has only one abstract method.
+It can be used for lambda expressions and method references.
+Its contains only one abstract method. and may contain multiple default methods and static methods.
+we used @FunctionalInterface annotation to declare a functional interface.
+
+Example:
+interface MyInterface{
+  public void sayHello(); // if its contain only one abstract  method
+}
+
+ @FunctionalInterface anotation is used to declare a functional interface. and  its tell the compiler that this interface is a functional interface.
+  its contains at least one abstract method. and may contain multiple default methods and static methods.
+
+  @FunctionalInterface
+interface MyInterface{
+  public void sayHello();
+}
+
+# advantage of functional interface annotation
+
+1. It can be used for lambda expressions and method references.
+2. It can be used for method references.
+3 its restricts the number of abstract methods to one.  so if people want to create a functional interface that has more than one abstract method, they can use the @FunctionalInterface annotation to declare it as a functional interface.
+
+
+
+# Inheritance In Functional Interface
+
+A functional interface can inherit from another interface.
+It can inherit from one or more interfaces.
+
+interface ParentInterface{
+  public void sayHello();
+}
+
+@FunctionalInterface
+Interface ChildInterface extends ParentInterface{
+  //public void sayHello();  // if its contain only one abstract  method it will give error
+}
+Funtional Interface can inherit from one or more interfaces. if parent interface contain only one abstract method then child interface also contain only one abstract method.
+ parent interface can have multiple default methods and static methods. child interface can have multiple default methods and static methods.
