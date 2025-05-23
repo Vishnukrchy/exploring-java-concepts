@@ -1,0 +1,169 @@
+#Default Method in Interface (Java 8+ Feature)
+Before Java 8:
+Interface = only abstract methods
+No method body allowed!
+Couldn’t add new methods to existing interfaces without breaking all implementing classes.
+
+ After Java 8: Default Methods to the Rescue
+You can now write concrete method implementations inside interfaces using the default keyword.
+
+✅ Syntax:
+interface MyInterface {
+    void sayHello(); // abstract method
+
+    default void sayDefaultHello() {
+        System.out.println("Default Hello from interface!");
+    }
+}
+✅ Example with Class Implementation
+interface MyInterface {
+    void sayHello(); // abstract
+
+    default void sayDefaultHello() {
+        System.out.println("👋 Default Hello from Interface");
+    }
+}
+
+class MyClass implements MyInterface {
+    public void sayHello() {
+        System.out.println("🔥 Hello from MyClass");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyClass obj = new MyClass();
+        obj.sayHello();           // Output: Hello from MyClass
+        obj.sayDefaultHello();    // Output: Default Hello from Interface
+    }
+}
+💡 Why Default Methods?
+Backward compatibility — You can add new methods to interfaces without breaking existing code.  we can add new feature to interface. without breaking old code or existing code.
+Multiple behavior sharing — Like a mixin/trait-lite.
+Default method is provide the default implementation for the method. in interface , in implementation class we can override the default method. and provide our own implementation.
+
+it can be override in child class.
+Java 8 Streams API uses this a lot (forEach, stream(), etc.)
+
+⚔️ What if Two Interfaces Have Same Default Method?
+java
+
+interface A {
+    default void show() {
+        System.out.println("From A");
+    }
+}
+
+interface B {
+    default void show() {
+        System.out.println("From B");
+    }
+}
+
+class C implements A, B {
+    public void show() {
+        // must override because of ambiguity
+        System.out.println("From C");
+        A.super.show(); // you can still call specific one
+    }
+}
+🧠 Summary Table
+Feature	Before Java 8	After Java 8
+Abstract methods	✅ Yes	✅ Yes
+Concrete methods	❌ No	✅ Via default
+Static methods in interface	❌ No	✅ Yes
+Lambda expressions	❌ No	✅ Yes
+
+
+💡 Why Default Methods Exist in Java 8+
+1. ✅ Backward Compatibility
+Let’s say you already have millions of lines of code using an interface.
+
+java
+Copy
+Edit
+interface NotificationService {
+    void sendNotification(String message);
+}
+Now you want to add a new method to send emails:
+
+java
+Copy
+Edit
+void sendEmail(String email);
+😱 Before Java 8, this would break every class that implements this interface because they’d be forced to implement the new method. Bad day!
+
+✅ Solution? Add a Default Method:
+java
+Copy
+Edit
+interface NotificationService {
+    void sendNotification(String message);
+
+    default void sendEmail(String email) {
+        System.out.println("Sending email to: " + email);
+    }
+}
+💥 Boom. Now existing classes don’t break, and new ones can override if they want!
+
+2. 🌀 Multiple Behavior Sharing (Like Traits / Mixins)
+In languages like Scala or Kotlin, you can use traits or mixins to share method logic. Java didn’t have that… until now.
+
+java
+Copy
+Edit
+interface Logger {
+    default void log(String msg) {
+        System.out.println("Log: " + msg);
+    }
+}
+
+interface Auditor {
+    default void audit(String action) {
+        System.out.println("Audit: " + action);
+    }
+}
+
+class UserService implements Logger, Auditor {
+    public void saveUser() {
+        log("Saving user");
+        audit("User saved");
+    }
+}
+🎯 Now your class gets default implementations from both interfaces — like traits/mixins — without using inheritance!
+
+3. 🧠 Override Only If You Want
+You get a default behavior — but you're free to customize it.
+
+java
+Copy
+Edit
+interface AppConfig {
+    default String getEnv() {
+        return "PROD"; // default env
+    }
+}
+
+class DevConfig implements AppConfig {
+    @Override
+    public String getEnv() {
+        return "DEV"; // override if needed
+    }
+}
+4. ✅ Real World Example — Java 8 Collection API
+java
+Copy
+Edit
+List<String> list = List.of("a", "b", "c");
+
+list.forEach(item -> System.out.println(item)); // forEach is a default method in Iterable
+forEach() was added as a default method to Iterable<T> interface — without breaking every class that already implemented Iterable.
+That's the power.
+
+🔥 TL;DR: Why Use Default Methods?
+Feature	Why It Matters
+✅ Backward Compatibility	Add new methods without breaking old code
+✅ Mixin-like Behavior	Share method logic across interfaces
+✅ Optional Override	Implement only if you need
+✅ Cleaner APIs	Interfaces evolve without forcing every implementer to update
+

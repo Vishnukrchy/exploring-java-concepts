@@ -42,3 +42,12 @@ Interface ChildInterface extends ParentInterface{
 }
 Funtional Interface can inherit from one or more interfaces. if parent interface contain only one abstract method then child interface also contain only one abstract method.
  parent interface can have multiple default methods and static methods. child interface can have multiple default methods and static methods.
+
+
+🧠 Recap: Benefits of Functional Interface
+Feature	Description
+✅ Lambda Support	Enables writing cleaner code with lambda
+✅ Less Boilerplate	No need to write long anonymous classes
+✅ Compile-time Safety	@FunctionalInterface prevents accidental mistakes
+✅ Default + Static methods	You can still include non-abstract helper methods
+
