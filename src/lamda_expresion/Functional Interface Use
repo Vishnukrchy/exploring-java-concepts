@@ -1,0 +1,184 @@
+🚀 What is a Functional Interface (with Lambda Expression)?
+A Functional Interface is an interface with exactly one abstract method.
+It’s specially designed to be used with lambda expressions, which let you write the implementation inline — without creating a separate class.
+
+💥 Why Use Lambda + Functional Interface?
+Problem with old way 😵	Solved by Lambda + Functional Interface 😎
+Had to write boilerplate classes	No need for implementation classes
+Verbose anonymous classes	One-liner lambda
+Hard to pass behavior around	You can pass functions as values now
+
+Example 1: Print a Message
+@FunctionalInterface
+interface Printer {
+    void print();
+}
+//older way
+class Demo {
+    public static void main(String[] args) {
+        Printer printer = new Printer() {
+            @Override
+            public void print() {
+                System.out.println("Hey Vishnu, Java 8 is lit! 🔥");
+            }
+        };
+        printer.print();
+    }
+}
+
+// Using Lambda Expression to solve the problem and avoid creating a separate class
+public class Demo {
+    public static void main(String[] args) {
+        Printer printer = () -> System.out.println(" Vishnu, Java 8 is lit! 🔥");
+        printer.print();
+    }
+}
+*** Note: Lambda Expression is a new feature of Java 8 and is not available in Java 7.
+          If this way of writing only works with functional interface, then it is a Lambda Expression.
+
+Example 2: Math Operation
+@FunctionalInterface
+interface Calculator {
+    int operate(int a, int b);
+}
+
+public class MathDemo {
+    public static void main(String[] args) {
+        Calculator add = (a, b) -> a + b;
+        System.out.println("Sum: " + add.operate(10, 5));
+        Calculator subtract = (a, b) -> a - b;
+        System.out.println("Difference: " + subtract.operate(10, 5));
+        Calculator multiply = (a, b) -> a * b;
+        System.out.println("Product: " + multiply.operate(10, 5));
+        Calculator divide = (a, b) -> a / b;
+        System.out.println("Quotient: " + divide.operate(10, 5));
+    }
+}
+Example 3: Greeting with a Name
+@FunctionalInterface
+interface Greeter {
+    void greet(String name);
+}
+
+public class GreetDemo {
+    public static void main(String[] args) {
+        Greeter g = (name) -> System.out.println("Hello, " + name + " 🚀");
+        g.greet("Vishnu");
+    }
+}
+🧠 TL;DR Summary:
+A Functional Interface has one abstract method ✅
+You can use it directly with a lambda expression 🔥
+Avoids extra classes and keeps code clean ✨
+Helps in writing flexible, testable, and short logic 🧩
+
+
+
+
+Day 2  =====================================================================================================================
+💡 Functional Interface = KEY to Lambda!
+A Functional Interface is an interface that has exactly one abstract method.
+
+That one method is what the lambda expression implements.
+
+✅ Basic Syntax Recap
+1. Traditional Anonymous Class
+java
+Runnable r = new Runnable() {
+    public void run() {
+        System.out.println("Running in old style...");
+    }
+};
+r.run();
+2. Same thing using Lambda + Functional Interface
+java
+Runnable r = () -> System.out.println("Running in lambda style...");
+r.run();
+🧠 Runnable is a functional interface. Its one method is void run();
+Lambda gives the logic for run() in a clean, modern way.
+
+🔨 Let’s Build a Custom Functional Interface Example
+java
+Copy
+Edit
+@FunctionalInterface
+interface MessagePrinter {
+    void printMessage(String message);
+}
+🔥 Use with Lambda Expression:
+java
+public class Demo {
+    public static void main(String[] args) {
+        // Lambda expression replacing an anonymous class
+        MessagePrinter printer = (msg) -> System.out.println("Message: " + msg);
+
+        printer.printMessage("Yo Vishnu! This is fire 🔥");
+    }
+}
+🤯 What This Solves:
+✅ Less Boilerplate
+✅ Cleaner, shorter, readable code
+✅ We can pass logic as parameter (yeah, like JS or Python)
+
+⚙️ Passing Behavior as Parameter Example
+Let’s say you want to apply a filter to a list.
+
+🧑 Functional Interface:
+java
+@FunctionalInterface
+interface Filter {
+    boolean apply(String value);
+}
+💡 Use Lambda to Pass Custom Filter Logic:
+java
+public class Demo {
+    public static void filterList(List<String> list, Filter filter) {
+        for (String item : list) {
+            if (filter.apply(item)) {
+                System.out.println(item);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("vishnu", "krishna", "kumar", "vinay");
+
+        // Filter names that start with "v"
+        filterList(names, name -> name.startsWith("v"));
+
+        // Filter names longer than 5 letters
+        filterList(names, name -> name.length() > 5);
+    }
+}
+🔥🔥 What Just Happened?
+You're literally passing custom logic (the lambda) to a method, and that logic is being executed — without creating classes or overriding methods.
+No anonymous classes. No boilerplate. Just functional style in Java.
+
+💥 Real-Life Use Cases (You’ll See in Projects):
+Use Case	Functional Interface Used
+Threading	Runnable
+Filtering streams	Predicate<T>
+Mapping streams	Function<T, R>
+Sorting	Comparator<T>
+Click Listeners (JavaFX/Swing/Android)	Custom interfaces
+
+🚀 Summary
+🔑 Functional Interface
+1 abstract method
+Can have default & static methods
+Use @FunctionalInterface annotation to be safe
+🔥 Lambda Expression
+Compact way to implement functional interfaces
+Used to pass behavior (like a function!) into methods
+Kills boilerplate
+Java’s bridge to FP (Functional Programming)
+
+
+
+
+
+
+
+
+
+
