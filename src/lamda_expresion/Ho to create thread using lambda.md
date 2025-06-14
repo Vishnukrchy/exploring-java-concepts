@@ -47,3 +47,22 @@ Thread t1 = new Thread(() -> {
     }
 });
 t1.start();
+// main class
+class Main {
+    public static void main(String[] args) {
+        // Starting the thread created using lambda expression
+        Thread t1 = new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                System.out.println("Value of i: " + i);
+                try {
+                    Thread.sleep(1000); // sleep for 1 second
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t1.start();
+
+        System.out.println("Main thread is running...");
+    }
+}
