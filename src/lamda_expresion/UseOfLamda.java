@@ -5,7 +5,7 @@ interface reference can be used the hold the lamda expression
  by  using lamda expression we can  used interface  method without creating a class or implementing it
  */
 
-interface  Employee{
+public interface  Employee{
     double getSalary();
 }
 public class UseOfLamda {
