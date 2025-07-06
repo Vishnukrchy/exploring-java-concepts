@@ -11,7 +11,7 @@ import java.util.function.Supplier;
     * It is commonly used in scenarios where a value needs to be provided without any input, such as generating random numbers, creating objects, or providing default values.
     * Supplier is often used in functional programming to create factories or providers for objects.
     * It is also used in scenarios where a value needs to be provided lazily, such as in caching or memoization.
-    *
+
  */
 public class E1_Suplier {
     public static void main(String[] args) {
