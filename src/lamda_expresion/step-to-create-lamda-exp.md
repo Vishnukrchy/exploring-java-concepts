@@ -1,4 +1,4 @@
-# Step to create a lamada expression
+# Step to create a lambda expression
 
 private static void printMessage() {
     System.out.println("hello world");
@@ -37,6 +37,7 @@ private static int printMessage(int a ,int b) {
 
 lambda expression
 (int a,int b)-> {return a+b;};
+
 Notes:  we can used type inference in lambda expression. (compiler will infer the return type and date type of argument automatically.)
         we can remove curly braces if there is only one statement in method body.
         we can remove return keyword if there is only one statement in method body.
@@ -62,9 +63,47 @@ to make lamda expression more readable and more efficient, we can use method ref
 jar file size is reduced.
 eliminate shadow variable.
 
+Example 4: Constructor Reference
+public class Car {
+    private String color;
+    private int year;
 
+    public Car(String color, int year) {
+        this.color = color;
+        this.year = year;
+    }
+}
 
+public class CarFactory {
+    public static Car createCar(String color, int year) {
+        return new Car(color, year);
+    }
+}
 
+//using lambda expression
+Supplier<Car> supplier = () -> CarFactory.createCar("red", 2022);
+Car car1 = supplier.get();
+//using constructor reference
+Supplier<Car> supplier2 = CarFactory::createCar;
+Car car2 = supplier2.get();
 
+Example 5: Method Reference
+public class Car {
+    public void printMessage(String message) {
+        System.out.println(message);
+    }
+}
 
+public class CarFactory {
+    public static void printCarMessage(Car car, String message) {
+        car.printMessage(message);
+    }
+}
 
+//using lambda expression
+BiConsumer<Car, String> biConsumer = (car, message) -> CarFactory.printCarMessage(car, message);
+biConsumer.accept(new Car(), "Hello World!");
+
+//using method reference
+BiConsumer<Car, String> biConsumer2 = CarFactory::printCarMessage;
+biConsumer2.accept(new Car(), "Hello World!");
