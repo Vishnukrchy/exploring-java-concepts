@@ -29,6 +29,7 @@ class ThreadCreationExample2 {
         });
         thread.start(); // Start the thread
 
+
     }
 }
 // Normally, we would create a thread by implementing the Runnable interface or extending the Thread class.
